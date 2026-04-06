@@ -6,129 +6,96 @@
     <title>Reducing Post-Booking Anxiety | 30 Sundays</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #fff;
             color: #333;
-            line-height: 1.55;
+            line-height: 1.5;
             font-size: 13px;
         }
+        .page { max-width: 600px; margin: 0 auto; padding: 1.25rem 1.25rem 2rem; }
 
-        .page {
-            max-width: 620px;
-            margin: 0 auto;
-            padding: 1.5rem 1.25rem;
-        }
+        /* Header - minimal */
+        .header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; }
+        .header h1 { font-size: 0.85rem; font-weight: 600; }
+        .header .meta { font-size: 0.65rem; color: #999; }
 
-        header {
+        /* Problem statement - immediately visible */
+        .problem {
+            background: #f5f5f5;
+            border-left: 3px solid #222;
+            padding: 0.5rem 0.7rem;
+            font-size: 0.78rem;
+            color: #444;
             margin-bottom: 1rem;
-            padding-bottom: 0.6rem;
-            border-bottom: 1px solid #ddd;
-        }
-        header h1 { font-size: 1rem; font-weight: 600; margin-bottom: 0.15rem; }
-        header .sub { font-size: 0.7rem; color: #999; }
-
-        .problem-box {
-            background: #f8f8f8;
-            border-left: 3px solid #333;
-            padding: 0.5rem 0.75rem;
-            margin-bottom: 1.25rem;
-            font-size: 0.8rem;
-            color: #444;
         }
 
-        h2 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin: 1.25rem 0 0.35rem 0;
-            color: #111;
+        /* TOC */
+        .toc {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.68rem;
         }
-        h2 .part { font-weight: 400; color: #999; font-size: 0.7rem; margin-right: 0.3rem; }
+        .toc a {
+            color: #666;
+            text-decoration: none;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .toc a:hover { border-color: #999; }
+        .toc a.active { border-color: #333; color: #111; font-weight: 600; }
 
-        h3 {
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin: 0.9rem 0 0.2rem 0;
-        }
+        hr { border: none; border-top: 1px solid #eee; margin: 1rem 0; }
 
-        p {
-            margin-bottom: 0.4rem;
-            font-size: 0.8rem;
-            color: #444;
-        }
+        /* Section headers */
+        h2 { font-size: 0.78rem; font-weight: 700; color: #111; margin: 1rem 0 0.3rem; }
+        h2 .n { color: #999; font-weight: 400; margin-right: 0.2rem; }
+        h3 { font-size: 0.73rem; font-weight: 600; margin: 0.6rem 0 0.15rem; color: #222; }
+        p { font-size: 0.75rem; color: #555; margin-bottom: 0.3rem; }
 
-        ol, ul {
-            margin: 0.25rem 0 0.75rem 1.1rem;
-            font-size: 0.8rem;
-            color: #444;
-        }
-        li { margin-bottom: 0.15rem; }
+        /* Lists */
+        ol, ul { margin: 0.15rem 0 0.5rem 1rem; font-size: 0.75rem; color: #555; }
+        li { margin-bottom: 0.1rem; }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0.4rem 0 0.75rem 0;
-            font-size: 0.75rem;
-        }
-        th, td {
-            text-align: left;
-            padding: 0.3rem 0.5rem;
-            border-bottom: 1px solid #eee;
-            vertical-align: top;
-        }
-        th {
-            font-weight: 600;
-            color: #888;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 0.3rem 0 0.6rem; font-size: 0.72rem; }
+        th, td { text-align: left; padding: 0.25rem 0.4rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+        th { font-weight: 600; color: #999; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.03em; border-bottom-color: #ddd; }
 
+        /* Quotes */
         blockquote {
             border-left: 2px solid #ddd;
-            padding: 0.3rem 0.6rem;
-            margin: 0.35rem 0;
-            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            margin: 0.25rem 0;
+            font-size: 0.72rem;
             color: #555;
             font-style: italic;
         }
-        blockquote.negative { border-left-color: #d44; }
-        blockquote cite {
-            display: block;
-            font-style: normal;
-            font-size: 0.65rem;
-            color: #aaa;
-            margin-top: 0.15rem;
-        }
+        blockquote.neg { border-left-color: #d44; }
+        blockquote cite { display: block; font-style: normal; font-size: 0.6rem; color: #aaa; margin-top: 0.1rem; }
 
+        /* Callout */
         .callout {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-            padding: 0.5rem 0.75rem;
-            margin: 0.75rem 0;
-            font-size: 0.8rem;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 0.4rem 0.6rem;
+            margin: 0.5rem 0;
+            font-size: 0.75rem;
+            color: #444;
         }
         .callout strong { color: #111; }
 
-        hr {
-            border: none;
-            border-top: 1px solid #ddd;
-            margin: 1.25rem 0;
-        }
-
-        .note { font-size: 0.65rem; color: #aaa; margin-top: 0.25rem; }
-        .placeholder { color: #ccc; font-size: 0.75rem; font-style: italic; }
+        .note { font-size: 0.6rem; color: #bbb; }
+        .placeholder { color: #ccc; font-size: 0.72rem; font-style: italic; }
 
         /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .fade-in { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 600px) {
+            .page { padding: 1rem; }
         }
     </style>
 </head>
@@ -136,114 +103,106 @@
 
 <div class="page">
 
-    <header>
+    <div class="header">
         <h1>Reducing Post-Booking Anxiety at 30 Sundays</h1>
-        <div class="sub">Arastu · April 2026</div>
-    </header>
-
-    <div class="problem-box">
-        <strong>Problem statement:</strong> Customers book international trips worth ₹1-3L with 30 Sundays. After paying, many feel anxious about next steps: documents, visas, timelines. They contact support frequently, ops responds manually, increasing support load and reducing confidence.
+        <div class="meta">Arastu · Apr 2026</div>
     </div>
 
-    <h2><span class="part">Part 1.</span> What causes anxiety and where it peaks</h2>
+    <div class="problem">
+        <strong>Problem:</strong> Customers book high-value international trips (₹1-3L) with 30 Sundays. After paying, many feel anxious about next steps. They contact support frequently, ops responds manually. Goal: reduce this anxiety through product.
+    </div>
 
-    <h3>Research</h3>
-    <p>I went through the 30 Sundays funnel as a customer before writing this:</p>
+    <nav class="toc">
+        <a href="#part1" class="active">1. Anxiety Map</a>
+        <a href="#part2">2. Solution</a>
+        <a href="#part3">3. Metrics</a>
+    </nav>
+
+    <!-- PART 1 -->
+    <h2 id="part1"><span class="n">1.</span> What causes anxiety and where it peaks</h2>
+
+    <h3>How I researched this</h3>
     <ol class="fade-in">
-        <li>Submitted a trip inquiry on the website (Vietnam, 2 adults, 5 nights)</li>
-        <li>Received 3 curated itineraries via WhatsApp within 60 seconds from the AI bot</li>
-        <li>Got assigned a consultant, call scheduled within 15 minutes</li>
-        <li>Had a consultation call covering pricing, visa process, payment structure</li>
-        <li>Read 30+ customer reviews on Holidify, App Store, and Google Reviews</li>
+        <li>Went through the 30 Sundays funnel as a customer (Vietnam, 2 adults, 5 nights)</li>
+        <li>Received 3 itineraries via WhatsApp within 60 seconds from the AI bot</li>
+        <li>Got assigned a consultant, call within 15 minutes, had full consultation</li>
+        <li>Read 30+ reviews on Holidify (3.3★), App Store (4.0★), Google (4.6★)</li>
     </ol>
 
-    <h3>Key findings</h3>
+    <h3>Findings</h3>
     <table class="fade-in">
-        <tr><th>Area</th><th>Finding</th></tr>
-        <tr><td>Pre-sale</td><td>Bot replies in seconds. Consultant calls in 15 minutes. Fast, responsive, personal.</td></tr>
-        <tr><td>Payment</td><td>100% of flights + 10% of landing costs upfront. ₹60,000-85,000 on day one for a typical trip.</td></tr>
-        <tr><td>Post-sale</td><td>Communication slows down significantly. Customers lose visibility into what's happening with their trip.</td></tr>
-        <tr><td>Existing tools</td><td>Post-booking app exists (itinerary, doc vault, chat) but adoption is very low (12 App Store ratings). Consultant didn't mention it on the call.</td></tr>
+        <tr><th>Area</th><th>What I found</th></tr>
+        <tr><td>Pre-sale</td><td>Bot replies in seconds, consultant calls in 15 min. Fast, responsive, personal.</td></tr>
+        <tr><td>Payment</td><td>100% of flights + 10% landing costs upfront = ₹60-85K on day one.</td></tr>
+        <tr><td>Post-sale</td><td>Communication slows down. Customers lose visibility into their trip status.</td></tr>
+        <tr><td>App</td><td>Post-booking app exists but barely adopted (12 App Store ratings). Consultant didn't mention it.</td></tr>
     </table>
 
-    <h3>Where anxiety peaks</h3>
-    <p>Four points post-booking where anxiety spikes. In all of them, the customer can't tell if things are progressing normally or if something went wrong.</p>
-
+    <h3>Anxiety peaks</h3>
     <table class="fade-in">
-        <tr><th>When</th><th>What happens</th><th>Anxiety</th></tr>
-        <tr>
-            <td>Day 1-2</td>
-            <td><strong>Payment.</strong> ₹60K+ to a company found on Instagram 48 hours ago. Doubts about cancellation policy, visa risk, pricing.</td>
-            <td>High</td>
-        </tr>
-        <tr>
-            <td>Day 3-10</td>
-            <td><strong>The Void.</strong> Consultant is booking hotels and flights behind the scenes. Customer sees nothing. No confirmations, no timeline.</td>
-            <td>Peak</td>
-        </tr>
-        <tr>
-            <td>Day 10-20</td>
-            <td><strong>Visa processing.</strong> Documents submitted, then silence. If rejected, customer loses the trip and potentially the money.</td>
-            <td>Peak</td>
-        </tr>
-        <tr>
-            <td>Day 20-28</td>
-            <td><strong>Pre-departure.</strong> Vouchers, driver details, transfer info buried across 3 weeks of WhatsApp messages.</td>
-            <td>High</td>
-        </tr>
+        <tr><th>When</th><th>What happens</th><th>Level</th></tr>
+        <tr><td>Day 1-2</td><td><strong>Payment.</strong> ₹60K+ to a company found on Instagram 48 hours ago.</td><td>High</td></tr>
+        <tr><td>Day 3-10</td><td><strong>The Void.</strong> Consultant booking behind the scenes. Customer sees nothing.</td><td>Peak</td></tr>
+        <tr><td>Day 10-20</td><td><strong>Visa.</strong> Documents submitted, then silence. Rejection means losing trip + money.</td><td>Peak</td></tr>
+        <tr><td>Day 20-28</td><td><strong>Pre-departure.</strong> Info scattered across weeks of WhatsApp messages.</td><td>High</td></tr>
     </table>
 
     <div class="callout fade-in">
-        <strong>Core insight:</strong> The pre-sale experience is fast, proactive, and personal. After payment, it goes quiet. The team is still working, but the customer can't see any of it. Every "any update?" message is someone asking: "Is anyone working on my trip?"
+        <strong>Core insight:</strong> Pre-sale is fast, proactive, personal. Post-payment goes quiet. The team is still working, but the customer can't see it. Every "any update?" message = "Is anyone working on my trip?"
     </div>
 
-    <h3>Review evidence</h3>
+    <h3>What reviews say</h3>
+    <p>The #1 complaint across platforms is the same: communication drops after payment.</p>
 
     <div class="fade-in">
-        <blockquote class="negative">
+        <blockquote class="neg">
             "Before payment, they are extremely sweet and constantly follow up. But once the payment is done, their response becomes very poor."
-            <cite>Bharati, Mumbai · Holidify · 1-star</cite>
+            <cite>Bharati, Mumbai · Holidify · ★☆☆☆☆</cite>
         </blockquote>
-
-        <blockquote class="negative">
+        <blockquote class="neg">
             "They keep delaying things, won't reply to your messages or calls."
-            <cite>sharma megs, Jaipur · Holidify · 1-star</cite>
+            <cite>sharma megs, Jaipur · Holidify · ★☆☆☆☆</cite>
         </blockquote>
-
-        <blockquote class="negative">
-            "The overall replies and modifications before booking were great. After, completely different."
-            <cite>Ayush Jain · Holidify · mixed</cite>
+        <blockquote class="neg">
+            "Replies and modifications before booking were great. After, completely different."
+            <cite>Ayush Jain · Holidify</cite>
         </blockquote>
-
+        <blockquote class="neg">
+            "Absolutely pathetic honeymoon experience. What should have been stress-free turned into a nightmare because of unprofessionalism, false promises, poor planning."
+            <cite>Naman Shukla, Delhi · Holidify · ★☆☆☆☆</cite>
+        </blockquote>
+        <blockquote class="neg">
+            "Specifically confirmed activity at 4 PM. Made full payment based on that. Final itinerary showed 5:30 AM checkout. Completely different from what was promised."
+            <cite>Shubham Sharma, Noida · Holidify · ★☆☆☆☆</cite>
+        </blockquote>
         <blockquote>
             "Best Travel App, but wished for earlier information about traffic and activity timings."
-            <cite>Anilb1995 · App Store · 5-star</cite>
+            <cite>Anilb1995 · App Store · ★★★★★</cite>
         </blockquote>
-
-        <p class="note">Sources: Holidify (30 reviews, 3.3★ avg) · App Store (12 ratings, 4.0★) · Google Reviews (361 reviews, 4.6★)</p>
+        <p class="note">Sources: Holidify (30 reviews, 3.3★) · App Store (12 ratings, 4.0★) · Google (361 reviews, 4.6★). Google's 4.6★ vs Holidify's 3.3★ is notable; multiple reviewers allege paid Google reviews.</p>
     </div>
 
     <div class="callout fade-in">
-        <strong>Pattern:</strong> The negative reviews aren't about trip quality, hotels, or pricing. They're about communication dropping after payment. The service isn't bad. It's invisible.
+        <strong>Pattern:</strong> Negative reviews aren't about trip quality, hotels, or pricing. They're about communication dropping after payment. The service isn't bad. It's invisible.
     </div>
 
     <hr>
 
-    <h2><span class="part">Part 2.</span> The solution</h2>
+    <!-- PART 2 -->
+    <h2 id="part2"><span class="n">2.</span> The solution</h2>
     <p class="placeholder">Coming soon</p>
 
     <hr>
 
-    <h2><span class="part">Part 3.</span> Measuring success</h2>
+    <!-- PART 3 -->
+    <h2 id="part3"><span class="n">3.</span> Measuring success</h2>
     <p class="placeholder">Coming soon</p>
 
 </div>
 
 <script>
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
