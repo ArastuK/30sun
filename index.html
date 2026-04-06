@@ -5,633 +5,289 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reducing Post-Booking Anxiety | 30 Sundays</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fafaf9;
-            color: #2a2a2a;
-            line-height: 1.7;
-            font-size: 15px;
+            font-family: 'Georgia', serif;
+            background: #fff;
+            color: #333;
+            line-height: 1.65;
+            font-size: 14px;
         }
 
-        /* ─── Layout ─── */
-        .container {
-            max-width: 680px;
+        .page {
+            max-width: 640px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
 
-        /* ─── Header ─── */
+        /* Header */
         header {
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        header .label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #999;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
         }
 
         header h1 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            line-height: 1.4;
-            margin-bottom: 0.75rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
         }
 
-        header .meta {
+        header .sub {
             font-size: 0.8rem;
-            color: #999;
-        }
-
-        header .meta span + span::before {
-            content: '·';
-            margin: 0 0.5rem;
-        }
-
-        /* ─── Problem Statement ─── */
-        .problem {
-            background: #f5f5f5;
-            border-radius: 8px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 3rem;
-            font-size: 0.9rem;
-            color: #444;
-        }
-
-        .problem strong {
-            color: #2a2a2a;
-        }
-
-        /* ─── Section headings ─── */
-        .section-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #999;
-            margin-bottom: 0.25rem;
-        }
-
-        h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: #444;
-        }
-
-        section {
-            margin-bottom: 3rem;
-        }
-
-        /* ─── Research steps ─── */
-        .steps {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .steps li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.9rem;
-            color: #444;
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .steps li .num {
-            color: #bbb;
-            font-size: 0.8rem;
-            min-width: 1.25rem;
-            font-weight: 500;
-        }
-
-        /* ─── Key findings grid ─── */
-        .findings {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .finding-card {
-            background: white;
-            border: 1px solid #e8e8e8;
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-        }
-
-        .finding-card h3 {
-            font-size: 0.85rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .finding-card p {
-            font-size: 0.85rem;
-            color: #555;
-            margin-bottom: 0;
-        }
-
-        /* ─── Emotional Arc ─── */
-        .arc-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #999;
-            margin-bottom: 0.75rem;
-        }
-
-        .arc-track {
-            display: flex;
-            margin-bottom: 0.75rem;
-        }
-
-        .arc-node {
-            flex: 1;
-            text-align: center;
-            padding: 0.75rem 0.15rem;
-        }
-
-        .arc-emoji {
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .arc-node-label {
-            font-size: 0.65rem;
             color: #888;
         }
 
-        .arc-bar {
-            height: 4px;
-            border-radius: 2px;
-            margin-top: 0.4rem;
+        /* Problem box */
+        .problem-box {
+            background: #f8f8f8;
+            border-left: 3px solid #333;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
         }
 
-        .anxiety-low .arc-bar { background: #a5d6a7; }
-        .anxiety-medium .arc-bar { background: #fff176; }
-        .anxiety-high .arc-bar { background: #ffab91; }
-        .anxiety-peak .arc-bar { background: #ef5350; }
-
-        .arc-legend {
-            display: flex;
-            gap: 1.25rem;
-            justify-content: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .arc-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: 0.65rem;
-            color: #999;
-        }
-
-        .arc-legend-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        /* ─── Journey Timeline ─── */
-        .journey {
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .journey::before {
-            content: '';
-            position: absolute;
-            left: 0.3rem;
-            top: 0;
-            bottom: 0;
-            width: 1.5px;
-            background: #e0e0e0;
-        }
-
-        .journey-step {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .journey-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            position: absolute;
-            left: -1.35rem;
-            top: 0.3rem;
-        }
-
-        .journey-dot.green { background: #66bb6a; }
-        .journey-dot.yellow { background: #fdd835; }
-        .journey-dot.orange { background: #ff7043; }
-        .journey-dot.red { background: #ef5350; }
-
-        .journey-time {
-            font-size: 0.7rem;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 0.15rem;
-        }
-
-        .journey-title {
+        /* Headings */
+        h2 {
             font-size: 0.95rem;
+            font-weight: 700;
+            margin: 1.75rem 0 0.5rem 0;
+            color: #111;
+        }
+
+        h2 .part {
+            font-weight: 400;
+            color: #999;
+            font-size: 0.75rem;
+            margin-right: 0.4rem;
+        }
+
+        h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin: 1.25rem 0 0.3rem 0;
+        }
+
+        p {
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+            color: #444;
+        }
+
+        /* Lists */
+        ol, ul {
+            margin: 0.4rem 0 1rem 1.25rem;
+            font-size: 0.85rem;
+            color: #444;
+        }
+
+        li { margin-bottom: 0.25rem; }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.75rem 0 1.25rem 0;
+            font-size: 0.8rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.4rem 0.6rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
             font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .journey-body {
-            font-size: 0.85rem;
-            color: #555;
-            margin-bottom: 0.4rem;
-        }
-
-        .quote {
-            background: #f7f7f7;
-            border-left: 2px solid #ddd;
-            padding: 0.6rem 0.9rem;
-            font-size: 0.85rem;
             color: #666;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* Quotes */
+        blockquote {
+            border-left: 2px solid #ddd;
+            padding: 0.4rem 0.75rem;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+            color: #555;
             font-style: italic;
-            border-radius: 0 6px 6px 0;
-            margin-top: 0.5rem;
-            margin-bottom: 0;
         }
 
-        .quote.review {
-            border-left-color: #ef5350;
-            background: #fef7f6;
+        blockquote.negative {
+            border-left-color: #d44;
         }
 
-        .quote cite {
+        blockquote cite {
             display: block;
             font-style: normal;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #aaa;
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
         }
 
-        /* ─── Callout box ─── */
+        /* Callout */
         .callout {
-            background: white;
-            border: 1.5px solid #2a2a2a;
-            border-radius: 8px;
-            padding: 1.25rem 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .callout h3 {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .callout p {
-            font-size: 0.9rem;
-            color: #444;
-            margin-bottom: 0;
-        }
-
-        .callout p + p {
-            margin-top: 0.5rem;
-        }
-
-        .callout.red {
-            border-color: #c0392b;
-        }
-
-        /* ─── Evidence cards ─── */
-        .evidence-grid {
-            display: grid;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .evidence-card {
-            background: white;
-            border: 1px solid #e8e8e8;
-            border-radius: 8px;
-            padding: 1rem;
-        }
-
-        .evidence-card .stars {
-            color: #fdd835;
-            font-size: 0.75rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .evidence-card blockquote {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
             font-size: 0.85rem;
-            color: #444;
-            font-style: italic;
-            margin-bottom: 0.35rem;
         }
 
-        .evidence-card cite {
-            font-size: 0.75rem;
-            color: #aaa;
-            font-style: normal;
+        .callout strong {
+            color: #111;
         }
 
-        .source-note {
-            font-size: 0.75rem;
-            color: #bbb;
-            text-align: center;
-            margin-top: 0.75rem;
-        }
-
-        /* ─── Divider ─── */
+        /* Divider */
         hr {
             border: none;
-            height: 1px;
-            background: #e8e8e8;
-            margin: 3rem 0;
+            border-top: 1px solid #ddd;
+            margin: 1.75rem 0;
         }
 
-        /* ─── Placeholder ─── */
+        /* Small text */
+        .note {
+            font-size: 0.7rem;
+            color: #aaa;
+        }
+
         .placeholder {
-            text-align: center;
-            padding: 2rem;
             color: #ccc;
-            font-size: 0.85rem;
-        }
-
-        /* ─── Scroll animation ─── */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ─── Responsive ─── */
-        @media (max-width: 600px) {
-            .findings {
-                grid-template-columns: 1fr;
-            }
-
-            .arc-node-label {
-                font-size: 0.6rem;
-            }
+            font-size: 0.8rem;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="page">
 
-    <!-- Header -->
     <header>
-        <div class="label">30 Sundays / Product Manager Assignment</div>
-        <h1>Reducing Customer Anxiety After Booking</h1>
-        <div class="meta">
-            <span>Arastu</span>
-            <span>April 2026</span>
-        </div>
+        <h1>Reducing Post-Booking Anxiety at 30 Sundays</h1>
+        <div class="sub">Arastu · April 2026</div>
     </header>
 
-    <!-- Problem Statement -->
-    <div class="problem">
-        <strong>Problem:</strong> Customers book high-value international trips (₹1-3L) with 30 Sundays. After paying, many feel anxious and confused about what happens next. They contact support frequently, and ops teams respond manually, increasing support load and reducing customer confidence.
+    <div class="problem-box">
+        <strong>Problem statement:</strong> Customers book international trips worth ₹1-3L with 30 Sundays. After paying, many feel anxious about next steps: documents, visas, timelines. They contact support frequently, ops responds manually, increasing support load and reducing confidence.
     </div>
 
-    <!-- Section 1: What causes anxiety -->
-    <section>
-        <div class="section-label">Part 1 of 3</div>
-        <h2>What causes anxiety and where it peaks</h2>
+    <!-- PART 1 -->
+    <h2><span class="part">Part 1.</span> What causes anxiety and where it peaks</h2>
 
-        <h3>Research approach</h3>
-        <p>I went through the 30 Sundays funnel as a customer before writing any of this.</p>
+    <h3>Research</h3>
+    <p>I went through the 30 Sundays funnel as a customer before writing this:</p>
+    <ol>
+        <li>Submitted a trip inquiry on the website (Vietnam, 2 adults, 5 nights)</li>
+        <li>Received 3 curated itineraries via WhatsApp within 60 seconds from the AI bot</li>
+        <li>Got assigned a consultant, call scheduled within 15 minutes</li>
+        <li>Had a consultation call covering pricing, visa process, payment structure</li>
+        <li>Read 30+ customer reviews on Holidify, App Store, and Google Reviews</li>
+    </ol>
 
-        <ul class="steps fade-in">
-            <li><span class="num">1</span> Submitted a trip inquiry on the website for Vietnam, 2 adults, 5 nights</li>
-            <li><span class="num">2</span> Received 3 curated itineraries via WhatsApp within 60 seconds from the AI bot</li>
-            <li><span class="num">3</span> Got assigned a dedicated consultant, call scheduled within 15 minutes</li>
-            <li><span class="num">4</span> Had a full consultation call covering pricing, visa process, and payment structure</li>
-            <li><span class="num">5</span> Read 30+ customer reviews on Holidify, App Store, and Google Reviews</li>
-        </ul>
+    <h3>Key findings</h3>
+    <table>
+        <tr>
+            <th>Area</th>
+            <th>Finding</th>
+        </tr>
+        <tr>
+            <td>Pre-sale</td>
+            <td>Bot replies in seconds. Consultant calls in 15 minutes. Fast, responsive, personal.</td>
+        </tr>
+        <tr>
+            <td>Payment</td>
+            <td>100% of flights + 10% of landing costs upfront. That's ₹60,000-85,000 on day one for a typical trip.</td>
+        </tr>
+        <tr>
+            <td>Post-sale</td>
+            <td>Communication slows down significantly. Customers lose visibility into what's happening with their trip.</td>
+        </tr>
+        <tr>
+            <td>Existing tools</td>
+            <td>30 Sundays has a post-booking app (itinerary, doc vault, chat) but adoption is very low (12 App Store ratings). Consultant didn't mention it on the call.</td>
+        </tr>
+    </table>
 
-        <h3>What I found</h3>
+    <h3>Where anxiety peaks</h3>
+    <p>There are four points in the post-booking journey where anxiety spikes. In all of them, the customer has no way to tell if things are progressing normally or if something has gone wrong.</p>
 
-        <div class="findings fade-in">
-            <div class="finding-card">
-                <h3>Pre-sale experience</h3>
-                <p>Bot replies in seconds. Consultant calls in 15 minutes. Quick, responsive, personal.</p>
-            </div>
-            <div class="finding-card">
-                <h3>Payment structure</h3>
-                <p>100% of flights + 10% of landing costs upfront. That's ₹60,000-85,000 on day one for a typical trip.</p>
-            </div>
-            <div class="finding-card">
-                <h3>Post-sale experience</h3>
-                <p>Communication slows down after payment. Customers lose visibility into what's happening with their trip.</p>
-            </div>
-            <div class="finding-card">
-                <h3>Existing app</h3>
-                <p>30 Sundays has a post-booking app with itinerary, document vault, and chat. But adoption is very low (12 App Store ratings). The consultant didn't mention it.</p>
-            </div>
-        </div>
-    </section>
+    <table>
+        <tr>
+            <th>When</th>
+            <th>What happens</th>
+            <th>Anxiety</th>
+        </tr>
+        <tr>
+            <td>Day 1-2</td>
+            <td><strong>Payment.</strong> ₹60K+ going to a company found on Instagram 48 hours ago. Doubts about cancellation policy, visa risk, whether this is a good deal.</td>
+            <td>High</td>
+        </tr>
+        <tr>
+            <td>Day 3-10</td>
+            <td><strong>The Void.</strong> Consultant is booking hotels and flights behind the scenes. Customer sees none of it. No confirmations, no timeline.</td>
+            <td>Peak</td>
+        </tr>
+        <tr>
+            <td>Day 10-20</td>
+            <td><strong>Visa processing.</strong> Documents submitted, then silence. If visa is rejected, customer loses the trip and potentially the money.</td>
+            <td>Peak</td>
+        </tr>
+        <tr>
+            <td>Day 20-28</td>
+            <td><strong>Pre-departure.</strong> Vouchers, driver details, transfer info buried across 3 weeks of WhatsApp messages. No single source of truth.</td>
+            <td>High</td>
+        </tr>
+    </table>
 
-    <hr>
+    <div class="callout">
+        <strong>Core insight:</strong> The pre-sale experience is fast, proactive, and personal. After payment, it goes quiet. The team is still working, but the customer can't see any of it. Every "any update?" message is someone asking: "Is anyone working on my trip?"
+    </div>
 
-    <!-- Emotional Arc -->
-    <section>
-        <h3>Emotional arc of the current experience</h3>
+    <h3>Review evidence</h3>
+    <p>The same pattern shows up repeatedly across review platforms:</p>
 
-        <div class="fade-in" style="margin-top: 1.5rem;">
-            <div class="arc-track">
-                <div class="arc-node anxiety-low">
-                    <span class="arc-emoji">😊</span>
-                    <span class="arc-node-label">Browsing</span>
-                    <div class="arc-bar"></div>
-                </div>
-                <div class="arc-node anxiety-low">
-                    <span class="arc-emoji">🤝</span>
-                    <span class="arc-node-label">Consultant</span>
-                    <div class="arc-bar"></div>
-                </div>
-                <div class="arc-node anxiety-high">
-                    <span class="arc-emoji">😰</span>
-                    <span class="arc-node-label">Payment</span>
-                    <div class="arc-bar"></div>
-                </div>
-                <div class="arc-node anxiety-peak">
-                    <span class="arc-emoji">😶</span>
-                    <span class="arc-node-label">The Void</span>
-                    <div class="arc-bar"></div>
-                </div>
-                <div class="arc-node anxiety-peak">
-                    <span class="arc-emoji">😟</span>
-                    <span class="arc-node-label">Visa Wait</span>
-                    <div class="arc-bar"></div>
-                </div>
-                <div class="arc-node anxiety-high">
-                    <span class="arc-emoji">😫</span>
-                    <span class="arc-node-label">Pre-departure</span>
-                    <div class="arc-bar"></div>
-                </div>
-                <div class="arc-node anxiety-medium">
-                    <span class="arc-emoji">✈️</span>
-                    <span class="arc-node-label">Trip</span>
-                    <div class="arc-bar"></div>
-                </div>
-            </div>
-            <div class="arc-legend">
-                <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#a5d6a7"></div> Low anxiety</div>
-                <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#fff176"></div> Medium</div>
-                <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#ffab91"></div> High</div>
-                <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#ef5350"></div> Peak</div>
-            </div>
-        </div>
+    <blockquote class="negative">
+        "Before payment, they are extremely sweet and constantly follow up. But once the payment is done, their response becomes very poor."
+        <cite>Bharati, Mumbai · Holidify · 1-star</cite>
+    </blockquote>
 
-        <h3>The journey after payment</h3>
+    <blockquote class="negative">
+        "They keep delaying things, won't reply to your messages or calls."
+        <cite>sharma megs, Jaipur · Holidify · 1-star</cite>
+    </blockquote>
 
-        <div class="journey fade-in" style="margin-top: 1.5rem;">
+    <blockquote class="negative">
+        "The overall replies and modifications before booking were great. After, completely different."
+        <cite>Ayush Jain · Holidify · mixed</cite>
+    </blockquote>
 
-            <div class="journey-step">
-                <div class="journey-dot green"></div>
-                <div class="journey-time">Day 0: Quote received</div>
-                <div class="journey-title">Trust and excitement are high</div>
-                <div class="journey-body">Consultant sends a quote over WhatsApp. The couple discusses, compares options. Consultant is responsive, answers quickly.</div>
-            </div>
+    <blockquote>
+        "Best Travel App, but wished for earlier information about traffic and activity timings."
+        <cite>Anilb1995 · App Store · 5-star</cite>
+    </blockquote>
 
-            <div class="journey-step">
-                <div class="journey-dot orange"></div>
-                <div class="journey-time">Day 1-2: Payment</div>
-                <div class="journey-title">₹60,000+ to a company they found on Instagram</div>
-                <div class="journey-body">Payment link arrives. Card details go in. Doubts surface: cancellation policy, visa risk, whether this is a good deal. These are people used to ₹500 Swiggy orders. ₹60K+ to a company they've known for 48 hours is a completely different decision.</div>
-            </div>
+    <p class="note">Sources: Holidify (30 reviews, 3.3★ avg) · App Store (12 ratings, 4.0★) · Google Reviews (361 reviews, 4.6★)</p>
 
-            <div class="journey-step">
-                <div class="journey-dot red"></div>
-                <div class="journey-time">Day 3-10: The Void</div>
-                <div class="journey-title">Money is gone. No updates.</div>
-                <div class="journey-body">The consultant who called within 15 minutes pre-sale is now booking hotels and flights behind the scenes. The customer sees none of it. No confirmations, no timeline, no updates.</div>
-                <div class="quote review">"Before payment, they are extremely sweet and constantly follow up. But once the payment is done, their response becomes very poor."<cite>Bharati, Mumbai · Holidify</cite></div>
-            </div>
-
-            <div class="journey-step">
-                <div class="journey-dot red"></div>
-                <div class="journey-time">Day 10-20: Visa processing</div>
-                <div class="journey-title">The thing that can cancel the entire trip</div>
-                <div class="journey-body">Documents get submitted, then silence. The customer doesn't know if the visa has been submitted, is processing, or is stuck. If it's rejected, they lose the trip and potentially the money.</div>
-            </div>
-
-            <div class="journey-step">
-                <div class="journey-dot orange"></div>
-                <div class="journey-time">Day 20-28: Pre-departure</div>
-                <div class="journey-title">Everything is scattered</div>
-                <div class="journey-body">Trip is days away. Vouchers, driver details, and transfer info are buried across 3 weeks of WhatsApp messages. No single place to find it all.</div>
-            </div>
-
-            <div class="journey-step">
-                <div class="journey-dot yellow"></div>
-                <div class="journey-time">Day 29: Departure</div>
-                <div class="journey-title">Is someone picking us up?</div>
-                <div class="journey-body">At the airport with no driver name, no phone number, no transfer confirmation.</div>
-                <div class="quote review">"No ground support, no planning."<cite>Vijay Pal, Pune · Holidify</cite></div>
-            </div>
-
-        </div>
-    </section>
+    <div class="callout">
+        <strong>Pattern:</strong> The negative reviews aren't about trip quality, hotels, or pricing. They're about communication dropping after payment. The service isn't bad. It's invisible.
+    </div>
 
     <hr>
 
-    <!-- Core insight + evidence -->
-    <section>
-        <div class="callout fade-in">
-            <h3>Core insight</h3>
-            <p>The pre-sale experience is fast, proactive, and personal. After payment, it goes quiet. The team is still working, but <strong>the customer can't see any of it.</strong></p>
-            <p>Every "any update?" message is a customer asking: <strong>"Is anyone working on my trip?"</strong></p>
-        </div>
-
-        <h3>Review evidence</h3>
-
-        <div class="evidence-grid fade-in">
-            <div class="evidence-card">
-                <div class="stars">★☆☆☆☆</div>
-                <blockquote>"After payment, their response becomes very poor. Calls are rarely answered and messages are slow."</blockquote>
-                <cite>Bharati, Mumbai · Holidify</cite>
-            </div>
-            <div class="evidence-card">
-                <div class="stars">★☆☆☆☆</div>
-                <blockquote>"They keep delaying things, won't reply to your messages or calls."</blockquote>
-                <cite>sharma megs, Jaipur · Holidify</cite>
-            </div>
-            <div class="evidence-card">
-                <div class="stars">★☆☆☆☆</div>
-                <blockquote>"The overall replies and modifications before booking were great. After, completely different."</blockquote>
-                <cite>Ayush Jain · Holidify</cite>
-            </div>
-            <div class="evidence-card">
-                <div class="stars">★★★★★</div>
-                <blockquote>"Best Travel App, but wished for earlier information about traffic and activity timings."</blockquote>
-                <cite>Anilb1995 · App Store</cite>
-            </div>
-        </div>
-        <div class="source-note">Holidify: 30 reviews, 3.3★ avg · App Store: 12 ratings, 4.0★ · Google: 361 reviews, 4.6★</div>
-
-        <div class="callout red fade-in">
-            <h3>Pattern</h3>
-            <p>The negative reviews aren't about trip quality, hotels, or pricing. They're all about <strong>communication dropping after payment.</strong></p>
-        </div>
-    </section>
+    <!-- PART 2 -->
+    <h2><span class="part">Part 2.</span> The solution</h2>
+    <p class="placeholder">Coming soon</p>
 
     <hr>
 
-    <!-- Section 2: Solution (placeholder) -->
-    <section>
-        <div class="section-label">Part 2 of 3</div>
-        <h2>The solution</h2>
-        <div class="placeholder">Coming soon</div>
-    </section>
-
-    <hr>
-
-    <!-- Section 3: Metrics (placeholder) -->
-    <section>
-        <div class="section-label">Part 3 of 3</div>
-        <h2>Measuring success</h2>
-        <div class="placeholder">Coming soon</div>
-    </section>
+    <!-- PART 3 -->
+    <h2><span class="part">Part 3.</span> Measuring success</h2>
+    <p class="placeholder">Coming soon</p>
 
 </div>
-
-<script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
 
 </body>
 </html>
