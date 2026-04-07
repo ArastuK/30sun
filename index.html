@@ -386,6 +386,8 @@
 
     <p class="note">For confirmations that don't come via email (driver assignments over WhatsApp from local partners, verbal commitments, etc.), there's a fallback: drop a screenshot or note into a dedicated channel. The agent ingests it the same way. Email handles ~90% of cases.</p>
 
+    <p class="note">WhatsApp Business API note: proactive messages from the agent use pre-approved templates (hotel confirmed, visa approved, etc., ~15-20 templates total, one-time setup). Once a customer sends a message, the agent has a 24-hour free-form window to respond with anything. 30 Sundays already runs on WhatsApp Business API for the pre-sale bot, so the infrastructure is in place.</p>
+
 
     <h3>What the customer experiences</h3>
 
@@ -517,7 +519,6 @@
     <table class="fade-in">
         <tr><th>Metric</th><th>Today (estimate)</th><th>Target</th></tr>
         <tr><td>"How informed did you feel about your trip?" (1-question post-trip survey, 1-10)</td><td>Baseline TBD</td><td>8.5+ average</td></tr>
-        <tr><td>Time-to-first-update after payment</td><td>Days</td><td>Under 2 hours</td></tr>
         <tr><td>% of bookings auto-captured by the agent</td><td>0%</td><td>Over 90%</td></tr>
         <tr><td>"Any update?" messages from customers per trip</td><td>Majority of inbound</td><td>Cut by 80%</td></tr>
         <tr><td>Median consultant response time on customer messages</td><td>Hours/days</td><td>Cut in half</td></tr>
@@ -545,6 +546,28 @@
         <tr><td>Escalation rate (% of agent conversations needing a human)</td><td>Too low = agent suppressing real needs. Too high = agent not actually helping</td><td>15-25%</td></tr>
         <tr><td>Consultant adoption and sentiment</td><td>Consultants must want to use the system, not be forced</td><td>Net positive in monthly survey</td></tr>
         <tr><td>"Personal touch" perception (post-trip survey)</td><td>Customers should feel more cared for, not less</td><td>No drop vs current baseline</td></tr>
+    </table>
+
+    <h3>Evaluating the agent</h3>
+    <p>The agent can't be a black box. Two layers of evals run continuously to catch quality issues before customers see them.</p>
+
+    <p><strong>Offline evals — run before shipping any change to the agent</strong></p>
+    <table class="fade-in">
+        <tr><th>Test</th><th>What it checks</th><th>Pass criteria</th></tr>
+        <tr><td>Factual accuracy</td><td>Agent answers from real trip data, no hallucinations</td><td>100% of answers either match the data or escalate</td></tr>
+        <tr><td>Refusal quality</td><td>Agent escalates when data is missing instead of guessing</td><td>100% escalation when data is unavailable</td></tr>
+        <tr><td>Tone consistency</td><td>Matches 30 Sundays brand voice (warm, couples-focused)</td><td>Human-rated 4.5+/5</td></tr>
+        <tr><td>Match accuracy</td><td>Bookings get attached to the right couple</td><td>100%, zero mismatches</td></tr>
+        <tr><td>Escalation triggers</td><td>Agent escalates emotional or out-of-scope questions correctly</td><td>Tested against 50+ tricky scenarios</td></tr>
+    </table>
+
+    <p><strong>Online evals — run continuously in production</strong></p>
+    <table class="fade-in">
+        <tr><th>Metric</th><th>How we measure</th><th>Threshold</th></tr>
+        <tr><td>Sampled answer accuracy</td><td>Random 5% of agent responses reviewed weekly by a human</td><td>Over 95% accurate</td></tr>
+        <tr><td>Hallucination rate</td><td>Same sample, flagged for any made-up information</td><td>0%</td></tr>
+        <tr><td>Customer-flagged errors</td><td>👍/👎 quick reply buttons attached to agent messages on WhatsApp</td><td>Under 2% of messages flagged</td></tr>
+        <tr><td>Escalation rate</td><td>% of conversations that get passed to a consultant</td><td>15-25% (the healthy band)</td></tr>
     </table>
 
     <h3>How we'd test before scaling</h3>
