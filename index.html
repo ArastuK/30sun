@@ -340,48 +340,51 @@
     <p>It's not a replacement for the consultant. It's the layer that makes the consultant's work visible, instant, and queryable.</p>
 
     <h3>How it works</h3>
-    <p>The whole system runs on a single loop. Consultant forwards a confirmation, the agent parses it, stores it, and notifies the customer.</p>
+    <p>The agent reads the consultant's work inbox via OAuth (set up once, runs forever). Every booking confirmation that lands gets parsed, stored, and turned into a customer-facing update automatically. The consultant doesn't change a thing about how they work.</p>
 
     <div class="diagram fade-in">
         <div class="d-row">
             <div class="d-box d-input">
                 <div class="d-label">Input</div>
-                <div class="d-title">Confirmation emails</div>
-                <div class="d-sub">Hotel · Flight · Visa · Transfer · Activity</div>
-            </div>
-            <div class="d-arrow">→</div>
-            <div class="d-box">
-                <div class="d-label">Step 1</div>
-                <div class="d-title">Forward</div>
-                <div class="d-sub">Consultant forwards to agent inbox</div>
+                <div class="d-title">Consultant's inbox</div>
+                <div class="d-sub">Hotel · Flight · Visa · Transfer · Activity confirmations land here</div>
             </div>
             <div class="d-arrow">→</div>
             <div class="d-box d-brain">
-                <div class="d-label">Step 2</div>
-                <div class="d-title">LLM Parse</div>
-                <div class="d-sub">Extract: customer, vendor, dates, price, voucher</div>
+                <div class="d-label">Step 1</div>
+                <div class="d-title">Detect & classify</div>
+                <div class="d-sub">Agent monitors inbox via OAuth. LLM identifies booking confirmations, ignores everything else.</div>
             </div>
         </div>
         <div class="d-row">
+            <div class="d-box d-brain">
+                <div class="d-label">Step 2</div>
+                <div class="d-title">Parse & match</div>
+                <div class="d-sub">Extract customer, vendor, dates, price, voucher. Match to the right active trip.</div>
+            </div>
+            <div class="d-arrow">→</div>
             <div class="d-box">
                 <div class="d-label">Step 3</div>
                 <div class="d-title">Store</div>
-                <div class="d-sub">Structured trip record + attached vouchers</div>
+                <div class="d-sub">Structured trip record. Voucher auto-attached.</div>
             </div>
-            <div class="d-arrow">→</div>
+        </div>
+        <div class="d-row">
             <div class="d-box d-output">
                 <div class="d-label">Step 4a</div>
                 <div class="d-title">Notify</div>
-                <div class="d-sub">WhatsApp message to customer in brand voice</div>
+                <div class="d-sub">WhatsApp message to customer in brand voice within seconds of the booking landing.</div>
             </div>
             <div class="d-arrow">→</div>
             <div class="d-box d-output">
                 <div class="d-label">Step 4b</div>
                 <div class="d-title">Answer</div>
-                <div class="d-sub">Agent uses stored data to answer any question, anytime</div>
+                <div class="d-sub">Agent uses stored data to answer any customer question 24/7, before, during, and after the trip.</div>
             </div>
         </div>
     </div>
+
+    <p class="note">For confirmations that don't come via email (driver assignments over WhatsApp from local partners, verbal commitments, etc.), there's a fallback: drop a screenshot or note into a dedicated channel. The agent ingests it the same way. Email handles ~90% of cases.</p>
 
 
     <h3>What the customer experiences</h3>
@@ -452,7 +455,7 @@
     </table>
 
     <h3>What the consultant experiences</h3>
-    <p>Almost nothing changes. They still book on supplier sites. They still own the customer relationship. The only new thing: they forward each confirmation email to the agent. One click.</p>
+    <p>Nothing changes about how they work. They book on the same supplier sites. They own the same customer relationships. Setup is a one-time OAuth grant during onboarding, then the agent runs in the background.</p>
     <p>What goes away:</p>
     <ul>
         <li>Manually writing customer update messages after every booking</li>
@@ -469,7 +472,7 @@
         <tr><td>"Train consultants to send proactive updates"</td><td>Process fixes decay under load. Consultants forget, write inconsistent messages, and the data still isn't structured. The agent <em>is</em> the structure.</td></tr>
         <tr><td>"Build a better post-booking app"</td><td>The app already exists and adoption is low (28 Google Play reviews, 1K downloads). Customers live on WhatsApp. The agent meets them there.</td></tr>
         <tr><td>"Add a status dashboard to the website"</td><td>Same problem as the app. Customers won't pull. The agent pushes to where they already are.</td></tr>
-        <tr><td>"Integrate directly with hotel and airline APIs"</td><td>Long, expensive, unreliable. Email forwarding is 10% of the work for 90% of the value. APIs become a v2 enhancement.</td></tr>
+        <tr><td>"Integrate directly with hotel and airline APIs"</td><td>Long, expensive, unreliable. Inbox monitoring is 10% of the work for 90% of the value. Direct APIs become a v2 enhancement.</td></tr>
         <tr><td>"Hire a 24/7 support team"</td><td>Doesn't scale economically. AI handles the 80% of repetitive questions; humans handle the 20% that need judgment.</td></tr>
     </table>
 
