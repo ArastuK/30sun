@@ -434,7 +434,7 @@
 
     <table class="fade-in">
         <tr><th>Trigger</th><th>What the customer gets on WhatsApp</th></tr>
-        <tr><td>Hotel confirmed</td><td>"Your Da Nang stay is locked in. Naman Retreat, ocean view room, April 10-14. Voucher attached. Photo of your room included."</td></tr>
+        <tr><td>Hotel confirmed</td><td>"Your Da Nang stay is locked in. Naman Retreat, ocean view king room for both of you, April 10-14. Voucher attached. Photo of your room included."</td></tr>
         <tr><td>Flight booked</td><td>"Flights confirmed. VietJet VJ520 Saigon→Da Nang, April 10 at 7:50 AM. Add to calendar."</td></tr>
         <tr><td>Visa submitted</td><td>"Visa application submitted today. Typical processing: 5-7 business days. I'll message you the moment it's approved."</td></tr>
         <tr><td>Visa approved</td><td>"Visa approved. Valid through May 30. Carry the printed copy I just sent."</td></tr>
@@ -451,7 +451,7 @@
         <tr><td>"Is breakfast included at this hotel?"</td><td>Checks the hotel confirmation email it parsed.</td></tr>
         <tr><td>"Where's my voucher for the cruise?"</td><td>Sends the PDF.</td></tr>
         <tr><td>"How do I say thank you in Vietnamese?"</td><td>LLM general knowledge.</td></tr>
-        <tr><td>"My room isn't what was promised"</td><td>Doesn't try to handle this. Escalates to Krishna with the booking confirmation showing the promised room category, so Krishna can act fast.</td></tr>
+        <tr><td>"My room isn't what was promised"</td><td>Doesn't try to handle this. Escalates to the consultant with the booking confirmation showing the promised room category, so they can act fast.</td></tr>
     </table>
 
     <h3>What the consultant experiences</h3>
@@ -465,32 +465,12 @@
     </ul>
     <p>Net effect: consultants spend less time on comms and admin, more time on planning, problem-solving, and customer relationships. The work that actually justifies a consultant-driven model.</p>
 
-    <h3>Why this and not alternatives</h3>
-
-    <table class="fade-in">
-        <tr><th>Alternative</th><th>Why it loses</th></tr>
-        <tr><td>"Train consultants to send proactive updates"</td><td>Process fixes decay under load. Consultants forget, write inconsistent messages, and the data still isn't structured. The agent <em>is</em> the structure.</td></tr>
-        <tr><td>"Build a better post-booking app"</td><td>The app already exists and adoption is low (28 Google Play reviews, 1K downloads). Customers live on WhatsApp. The agent meets them there.</td></tr>
-        <tr><td>"Add a status dashboard to the website"</td><td>Same problem as the app. Customers won't pull. The agent pushes to where they already are.</td></tr>
-        <tr><td>"Integrate directly with hotel and airline APIs"</td><td>Long, expensive, unreliable. Inbox monitoring is 10% of the work for 90% of the value. Direct APIs become a v2 enhancement.</td></tr>
-        <tr><td>"Hire a 24/7 support team"</td><td>Doesn't scale economically. AI handles the 80% of repetitive questions; humans handle the 20% that need judgment.</td></tr>
-    </table>
-
     <h3>What this doesn't solve (honest trade-offs)</h3>
     <ul>
-        <li><strong>Verbal commitments.</strong> If a consultant promises something on a call ("I'll throw in a free spa session"), there's no email to forward. We'd need a "log a note" interface for these. Known gap.</li>
+        <li><strong>Verbal commitments.</strong> If a consultant promises something on a call ("I'll throw in a free spa session"), there's no email for the agent to detect. We'd need a "log a note" interface for these. Known gap.</li>
         <li><strong>Real-time external changes.</strong> If a hotel cancels at 2 AM, the agent doesn't know until someone tells it. v2 would integrate with supplier systems.</li>
-        <li><strong>Customer match accuracy.</strong> The agent has to figure out which trip a forwarded confirmation belongs to. Solvable with name + date matching, but needs a "confirm this match?" prompt to the consultant when uncertain.</li>
-        <li><strong>Adoption depends on consultant behavior.</strong> If consultants don't forward, the agent has nothing to work with. Mitigation: forwarding has to be easier than the current state. If it isn't, redesign until it is.</li>
+        <li><strong>Customer match accuracy.</strong> Each trip is for a couple, so two different names can show up on bookings (hotel under one spouse, flight under the other). The agent matches on either name + dates + destination, with a one-tap "which trip?" prompt to the consultant when uncertain.</li>
         <li><strong>The agent must never bullshit.</strong> If data is missing, it says "I don't have that yet, here's why" and escalates. It never says "let me check and get back to you." This is a system design constraint.</li>
-    </ul>
-
-    <h3>Why this fits 30 Sundays specifically</h3>
-    <ul>
-        <li>30 Sundays is already AI-first. Annie the pre-sale bot proves the team is comfortable building with AI.</li>
-        <li>WhatsApp is already the primary channel for both pre-sale and consultants. The agent extends what's working.</li>
-        <li>The team is small and ships fast. This is buildable in weeks, not quarters.</li>
-        <li>The biggest competitive risk in this category is trust erosion. Solving the post-payment communication gap protects every other investment 30 Sundays makes.</li>
     </ul>
 
     <hr>
