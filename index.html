@@ -90,6 +90,21 @@
         .note { font-size: 0.6rem; color: #bbb; }
         .placeholder { color: #ccc; font-size: 0.72rem; font-style: italic; }
 
+        /* Emotional arc */
+        .arc-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin: 0.6rem 0 0.4rem; }
+        .arc-track { display: flex; margin-bottom: 0.4rem; }
+        .arc-node { flex: 1; text-align: center; padding: 0.3rem 0.1rem; }
+        .arc-emoji { font-size: 1.1rem; display: block; margin-bottom: 0.15rem; line-height: 1; }
+        .arc-node-label { font-size: 0.55rem; color: #888; display: block; margin-bottom: 0.25rem; }
+        .arc-bar { height: 3px; border-radius: 2px; }
+        .anxiety-low .arc-bar { background: #a5d6a7; }
+        .anxiety-medium .arc-bar { background: #fff176; }
+        .anxiety-high .arc-bar { background: #ffab91; }
+        .anxiety-peak .arc-bar { background: #ef5350; }
+        .arc-legend { display: flex; gap: 0.9rem; justify-content: center; margin-top: 0.3rem; margin-bottom: 0.6rem; }
+        .arc-legend-item { display: flex; align-items: center; gap: 0.25rem; font-size: 0.55rem; color: #999; }
+        .arc-legend-dot { width: 7px; height: 7px; border-radius: 50%; }
+
         /* Animations */
         .fade-in { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -140,6 +155,53 @@
 
     <h3>Where anxiety peaks</h3>
     <p>Four points post-booking where anxiety spikes. In all of them, the customer can't tell if things are progressing or if something went wrong.</p>
+
+    <div class="arc-label">Emotional arc — current experience</div>
+    <div class="fade-in">
+        <div class="arc-track">
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">😊</span>
+                <span class="arc-node-label">Browsing</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">🤝</span>
+                <span class="arc-node-label">Consultant</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-high">
+                <span class="arc-emoji">😰</span>
+                <span class="arc-node-label">Payment</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-peak">
+                <span class="arc-emoji">😶</span>
+                <span class="arc-node-label">The Void</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-peak">
+                <span class="arc-emoji">😟</span>
+                <span class="arc-node-label">Visa</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-high">
+                <span class="arc-emoji">😫</span>
+                <span class="arc-node-label">Pre-departure</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-medium">
+                <span class="arc-emoji">✈️</span>
+                <span class="arc-node-label">Trip</span>
+                <div class="arc-bar"></div>
+            </div>
+        </div>
+        <div class="arc-legend">
+            <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#a5d6a7"></div> Low</div>
+            <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#fff176"></div> Medium</div>
+            <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#ffab91"></div> High</div>
+            <div class="arc-legend-item"><div class="arc-legend-dot" style="background:#ef5350"></div> Peak</div>
+        </div>
+    </div>
 
     <table class="fade-in">
         <tr><th>When</th><th>What happens</th><th>Level</th></tr>
