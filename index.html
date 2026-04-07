@@ -105,6 +105,31 @@
         .arc-legend-item { display: flex; align-items: center; gap: 0.25rem; font-size: 0.55rem; color: #999; }
         .arc-legend-dot { width: 7px; height: 7px; border-radius: 50%; }
 
+        /* Diagram */
+        .diagram { margin: 0.6rem 0 0.8rem; }
+        .d-row { display: flex; align-items: stretch; gap: 0.3rem; margin-bottom: 0.5rem; }
+        .d-row:last-child { margin-bottom: 0; }
+        .d-box {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.4rem 0.5rem;
+            background: #fff;
+            min-width: 0;
+        }
+        .d-box.d-input { background: #f5f5f5; border-color: #ccc; }
+        .d-box.d-brain { background: #fef7e6; border-color: #e0c97a; }
+        .d-box.d-output { background: #eef7ee; border-color: #a5d6a7; }
+        .d-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.05em; color: #999; margin-bottom: 0.1rem; }
+        .d-title { font-size: 0.72rem; font-weight: 600; color: #222; margin-bottom: 0.1rem; }
+        .d-sub { font-size: 0.6rem; color: #777; line-height: 1.35; }
+        .d-arrow { display: flex; align-items: center; color: #bbb; font-size: 0.85rem; }
+
+        @media (max-width: 600px) {
+            .d-row { flex-direction: column; }
+            .d-arrow { transform: rotate(90deg); justify-content: center; padding: 0.1rem 0; }
+        }
+
         /* Animations */
         .fade-in { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -314,22 +339,96 @@
 
     <p>It's not a replacement for the consultant. It's the layer that makes the consultant's work visible, instant, and queryable.</p>
 
-    <h3>How it works (the architecture)</h3>
-    <p>The whole thing runs on one simple loop: forward → parse → store → notify.</p>
+    <h3>How it works</h3>
+    <p>The whole system runs on a single loop. Consultant forwards a confirmation, the agent parses it, stores it, and notifies the customer.</p>
 
-    <table class="fade-in">
-        <tr><th>Step</th><th>What happens</th></tr>
-        <tr><td>1. Forward</td><td>Consultant forwards every booking confirmation (hotel, flight, visa, transfer) to a dedicated agent inbox or drops it in a channel the agent monitors. No new behavior, just one click on emails they already receive.</td></tr>
-        <tr><td>2. Parse</td><td>LLM extracts structured fields: customer match, vendor, dates, room/seat type, price, confirmation number, voucher PDF.</td></tr>
-        <tr><td>3. Store</td><td>Data goes into a structured trip record linked to the customer. Voucher gets attached automatically.</td></tr>
-        <tr><td>4. Notify</td><td>Agent generates a customer-facing WhatsApp message in 30 Sundays' brand voice and sends it instantly. The trip dashboard updates in parallel.</td></tr>
-    </table>
+    <div class="diagram fade-in">
+        <div class="d-row">
+            <div class="d-box d-input">
+                <div class="d-label">Input</div>
+                <div class="d-title">Confirmation emails</div>
+                <div class="d-sub">Hotel · Flight · Visa · Transfer · Activity</div>
+            </div>
+            <div class="d-arrow">→</div>
+            <div class="d-box">
+                <div class="d-label">Step 1</div>
+                <div class="d-title">Forward</div>
+                <div class="d-sub">Consultant forwards to agent inbox</div>
+            </div>
+            <div class="d-arrow">→</div>
+            <div class="d-box d-brain">
+                <div class="d-label">Step 2</div>
+                <div class="d-title">LLM Parse</div>
+                <div class="d-sub">Extract: customer, vendor, dates, price, voucher</div>
+            </div>
+        </div>
+        <div class="d-row">
+            <div class="d-box">
+                <div class="d-label">Step 3</div>
+                <div class="d-title">Store</div>
+                <div class="d-sub">Structured trip record + attached vouchers</div>
+            </div>
+            <div class="d-arrow">→</div>
+            <div class="d-box d-output">
+                <div class="d-label">Step 4a</div>
+                <div class="d-title">Notify</div>
+                <div class="d-sub">WhatsApp message to customer in brand voice</div>
+            </div>
+            <div class="d-arrow">→</div>
+            <div class="d-box d-output">
+                <div class="d-label">Step 4b</div>
+                <div class="d-title">Answer</div>
+                <div class="d-sub">Agent uses stored data to answer any question, anytime</div>
+            </div>
+        </div>
+    </div>
 
-    <p>That's the entire system. No CRM rebuild, no API integrations with hotels and airlines, no behavior change for ops. Just inbox + LLM + WhatsApp Business API + database.</p>
+    <p>No CRM rebuild. No hotel/airline API integrations. No new tools for the consultant. Just an inbox, an LLM, the WhatsApp Business API, and a database.</p>
 
     <h3>What the customer experiences</h3>
 
-    <p><strong>Pre-trip — fills the void.</strong> Every time the consultant books something, the customer gets a real-time update with details, photos, and the voucher attached. No more "is anyone working on my trip?" The customer can see the trip taking shape in real time.</p>
+    <div class="arc-label">Emotional arc — with the agent</div>
+    <div class="fade-in">
+        <div class="arc-track">
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">😊</span>
+                <span class="arc-node-label">Browsing</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">🤝</span>
+                <span class="arc-node-label">Consultant</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-medium">
+                <span class="arc-emoji">💳</span>
+                <span class="arc-node-label">Payment</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">📲</span>
+                <span class="arc-node-label">Updates</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">✅</span>
+                <span class="arc-node-label">Visa</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">🤩</span>
+                <span class="arc-node-label">Pre-departure</span>
+                <div class="arc-bar"></div>
+            </div>
+            <div class="arc-node anxiety-low">
+                <span class="arc-emoji">✈️</span>
+                <span class="arc-node-label">Trip</span>
+                <div class="arc-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <p><strong>Pre-trip.</strong> Every time the consultant books something, the customer gets a real-time update with details, photos, and the voucher attached. The trip takes shape in real time instead of disappearing into a void.</p>
 
     <table class="fade-in">
         <tr><th>Trigger</th><th>What the customer gets on WhatsApp</th></tr>
@@ -340,7 +439,7 @@
         <tr><td>Driver assigned</td><td>"Your airport pickup: Minh, 4.8★ rated driver. Photo and number attached. He'll be at arrivals with a sign."</td></tr>
     </table>
 
-    <p><strong>During the trip — the personal assistant.</strong> Because the agent already has every detail of the trip in structured form, it can answer almost anything instantly.</p>
+    <p><strong>During the trip.</strong> Because the agent already has every detail of the trip in structured form, it can answer almost anything instantly. It works as a 24/7 personal assistant grounded in the customer's actual booking data.</p>
 
     <table class="fade-in">
         <tr><th>Customer asks (mid-trip)</th><th>Agent responds</th></tr>
