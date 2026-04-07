@@ -308,7 +308,89 @@
 
     <!-- PART 2 -->
     <h2 id="part2"><span class="n">2.</span> The solution</h2>
-    <p class="placeholder">Coming soon</p>
+
+    <h3>What it is</h3>
+    <p>An AI travel assistant on WhatsApp that becomes the customer's source of truth for their trip. It captures every booking the consultant makes, automatically generates customer-facing updates, and answers any trip question 24/7 grounded in real data.</p>
+
+    <p>It's not a replacement for the consultant. It's the layer that makes the consultant's work visible, instant, and queryable.</p>
+
+    <h3>How it works (the architecture)</h3>
+    <p>The whole thing runs on one simple loop: forward → parse → store → notify.</p>
+
+    <table class="fade-in">
+        <tr><th>Step</th><th>What happens</th></tr>
+        <tr><td>1. Forward</td><td>Consultant forwards every booking confirmation (hotel, flight, visa, transfer) to a dedicated agent inbox or drops it in a channel the agent monitors. No new behavior, just one click on emails they already receive.</td></tr>
+        <tr><td>2. Parse</td><td>LLM extracts structured fields: customer match, vendor, dates, room/seat type, price, confirmation number, voucher PDF.</td></tr>
+        <tr><td>3. Store</td><td>Data goes into a structured trip record linked to the customer. Voucher gets attached automatically.</td></tr>
+        <tr><td>4. Notify</td><td>Agent generates a customer-facing WhatsApp message in 30 Sundays' brand voice and sends it instantly. The trip dashboard updates in parallel.</td></tr>
+    </table>
+
+    <p>That's the entire system. No CRM rebuild, no API integrations with hotels and airlines, no behavior change for ops. Just inbox + LLM + WhatsApp Business API + database.</p>
+
+    <h3>What the customer experiences</h3>
+
+    <p><strong>Pre-trip — fills the void.</strong> Every time the consultant books something, the customer gets a real-time update with details, photos, and the voucher attached. No more "is anyone working on my trip?" The customer can see the trip taking shape in real time.</p>
+
+    <table class="fade-in">
+        <tr><th>Trigger</th><th>What the customer gets on WhatsApp</th></tr>
+        <tr><td>Hotel confirmed</td><td>"Your Da Nang stay is locked in. Naman Retreat, ocean view room, April 10-14. Voucher attached. Photo of your room included."</td></tr>
+        <tr><td>Flight booked</td><td>"Flights confirmed. VietJet VJ520 Saigon→Da Nang, April 10 at 7:50 AM. Add to calendar."</td></tr>
+        <tr><td>Visa submitted</td><td>"Visa application submitted today. Typical processing: 5-7 business days. I'll message you the moment it's approved."</td></tr>
+        <tr><td>Visa approved</td><td>"Visa approved. Valid through May 30. Carry the printed copy I just sent."</td></tr>
+        <tr><td>Driver assigned</td><td>"Your airport pickup: Minh, 4.8★ rated driver. Photo and number attached. He'll be at arrivals with a sign."</td></tr>
+    </table>
+
+    <p><strong>During the trip — the personal assistant.</strong> Because the agent already has every detail of the trip in structured form, it can answer almost anything instantly.</p>
+
+    <table class="fade-in">
+        <tr><th>Customer asks (mid-trip)</th><th>Agent responds</th></tr>
+        <tr><td>"How do I get from my hotel to Golden Hands Bridge?"</td><td>Knows the hotel address, knows the activity, gives directions and travel time.</td></tr>
+        <tr><td>"What time is my pickup tomorrow?"</td><td>Pulls from the transfer confirmation.</td></tr>
+        <tr><td>"Lost my driver's number"</td><td>Sends it instantly.</td></tr>
+        <tr><td>"Is breakfast included at this hotel?"</td><td>Checks the hotel confirmation email it parsed.</td></tr>
+        <tr><td>"Where's my voucher for the cruise?"</td><td>Sends the PDF.</td></tr>
+        <tr><td>"How do I say thank you in Vietnamese?"</td><td>LLM general knowledge.</td></tr>
+        <tr><td>"My room isn't what was promised"</td><td>Doesn't try to handle this. Escalates to Krishna with the booking confirmation showing the promised room category, so Krishna can act fast.</td></tr>
+    </table>
+
+    <h3>What the consultant experiences</h3>
+    <p>Almost nothing changes. They still book on supplier sites. They still own the customer relationship. The only new thing: they forward each confirmation email to the agent. One click.</p>
+    <p>What goes away:</p>
+    <ul>
+        <li>Manually writing customer update messages after every booking</li>
+        <li>Hunting for vouchers in old emails three weeks later</li>
+        <li>Answering "any update?" messages five times a day</li>
+        <li>Being the sole memory of what was promised vs what was booked</li>
+    </ul>
+    <p>Net effect: consultants spend less time on comms and admin, more time on planning, problem-solving, and customer relationships. The work that actually justifies a consultant-driven model.</p>
+
+    <h3>Why this and not alternatives</h3>
+
+    <table class="fade-in">
+        <tr><th>Alternative</th><th>Why it loses</th></tr>
+        <tr><td>"Train consultants to send proactive updates"</td><td>Process fixes decay under load. Consultants forget, write inconsistent messages, and the data still isn't structured. The agent <em>is</em> the structure.</td></tr>
+        <tr><td>"Build a better post-booking app"</td><td>The app already exists and adoption is low (28 Google Play reviews, 1K downloads). Customers live on WhatsApp. The agent meets them there.</td></tr>
+        <tr><td>"Add a status dashboard to the website"</td><td>Same problem as the app. Customers won't pull. The agent pushes to where they already are.</td></tr>
+        <tr><td>"Integrate directly with hotel and airline APIs"</td><td>Long, expensive, unreliable. Email forwarding is 10% of the work for 90% of the value. APIs become a v2 enhancement.</td></tr>
+        <tr><td>"Hire a 24/7 support team"</td><td>Doesn't scale economically. AI handles the 80% of repetitive questions; humans handle the 20% that need judgment.</td></tr>
+    </table>
+
+    <h3>What this doesn't solve (honest trade-offs)</h3>
+    <ul>
+        <li><strong>Verbal commitments.</strong> If a consultant promises something on a call ("I'll throw in a free spa session"), there's no email to forward. We'd need a "log a note" interface for these. Known gap.</li>
+        <li><strong>Real-time external changes.</strong> If a hotel cancels at 2 AM, the agent doesn't know until someone tells it. v2 would integrate with supplier systems.</li>
+        <li><strong>Customer match accuracy.</strong> The agent has to figure out which trip a forwarded confirmation belongs to. Solvable with name + date matching, but needs a "confirm this match?" prompt to the consultant when uncertain.</li>
+        <li><strong>Adoption depends on consultant behavior.</strong> If consultants don't forward, the agent has nothing to work with. Mitigation: forwarding has to be easier than the current state. If it isn't, redesign until it is.</li>
+        <li><strong>The agent must never bullshit.</strong> If data is missing, it says "I don't have that yet, here's why" and escalates. It never says "let me check and get back to you." This is a system design constraint.</li>
+    </ul>
+
+    <h3>Why this fits 30 Sundays specifically</h3>
+    <ul>
+        <li>30 Sundays is already AI-first. Annie the pre-sale bot proves the team is comfortable building with AI.</li>
+        <li>WhatsApp is already the primary channel for both pre-sale and consultants. The agent extends what's working.</li>
+        <li>The team is small and ships fast. This is buildable in weeks, not quarters.</li>
+        <li>The biggest competitive risk in this category is trust erosion. Solving the post-payment communication gap protects every other investment 30 Sundays makes.</li>
+    </ul>
 
     <hr>
 
