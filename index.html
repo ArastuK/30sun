@@ -130,6 +130,59 @@
             .d-arrow { transform: rotate(90deg); justify-content: center; padding: 0.1rem 0; }
         }
 
+        /* Trip record card */
+        .trip-card {
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            background: #fff;
+            margin: 0.6rem 0;
+            font-size: 0.7rem;
+            font-family: 'SF Mono', Menlo, Monaco, monospace;
+            overflow: hidden;
+        }
+        .trip-card-header {
+            background: #f0f0f0;
+            padding: 0.4rem 0.7rem;
+            border-bottom: 1px solid #d0d0d0;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            font-weight: 600;
+        }
+        .trip-card-title {
+            padding: 0.5rem 0.7rem;
+            background: #fafafa;
+            border-bottom: 1px solid #eee;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #222;
+        }
+        .trip-card-section {
+            padding: 0.4rem 0.7rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .trip-card-section:last-child { border-bottom: none; }
+        .tcs-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .tcs-row {
+            display: flex;
+            gap: 0.4rem;
+            padding: 0.1rem 0;
+            color: #444;
+        }
+        .tcs-status { width: 0.8rem; flex-shrink: 0; }
+        .tcs-status.ok { color: #2e7d32; }
+        .tcs-status.pending { color: #f57c00; }
+        .tcs-row .meta { color: #999; margin-left: auto; }
+
         /* Highlighted key terms */
         .k {
             background: #fff3b8;
@@ -396,6 +449,52 @@
     <p class="note">For confirmations that don't come via email (driver assignments over WhatsApp from local partners, verbal commitments, etc.), there's a fallback: drop a screenshot or note into a dedicated channel. The agent ingests it the same way. Email handles ~90% of cases.</p>
 
     <p class="note">WhatsApp Business API note: proactive messages from the agent use pre-approved templates (hotel confirmed, visa approved, etc., ~15-20 templates total, one-time setup). Once a customer sends a message, the agent has a 24-hour free-form window to respond with anything. 30 Sundays already runs on WhatsApp Business API for the pre-sale bot, so the infrastructure is in place.</p>
+
+    <h3>What the agent knows about each trip</h3>
+    <p>Behind every customer conversation is a structured trip record. This is why the agent can answer specific questions instead of giving generic responses. When a customer asks anything, the agent looks up this record and answers from real data.</p>
+
+    <div class="trip-card fade-in">
+        <div class="trip-card-header">Trip Record · Internal Data Structure</div>
+        <div class="trip-card-title">Arastu + Priya · Vietnam · April 10-17, 2026</div>
+
+        <div class="trip-card-section">
+            <div class="tcs-label">Hotels</div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> Naman Retreat · Da Nang · Ocean view king<span class="meta">Apr 10-14</span></div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> La Sinfonia del Rey · Hanoi Old Quarter<span class="meta">Apr 14-16</span></div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> Heritage Line cruise · Halong Bay<span class="meta">Apr 16-17</span></div>
+        </div>
+
+        <div class="trip-card-section">
+            <div class="tcs-label">Flights</div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> VietJet VJ520 · BLR → DAD · 7:50 AM<span class="meta">Apr 10</span></div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> VietJet VJ521 · HAN → BLR · 9:20 PM<span class="meta">Apr 17</span></div>
+        </div>
+
+        <div class="trip-card-section">
+            <div class="tcs-label">Visa</div>
+            <div class="tcs-row"><span class="tcs-status pending">⏳</span> E-visa application submitted<span class="meta">Mar 28, processing</span></div>
+        </div>
+
+        <div class="trip-card-section">
+            <div class="tcs-label">Transfers</div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> DAD airport pickup · Minh (4.8★)<span class="meta">Apr 10</span></div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> Da Nang → Hue day trip driver<span class="meta">Apr 12</span></div>
+        </div>
+
+        <div class="trip-card-section">
+            <div class="tcs-label">Activities</div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> Ba Na Hills + Golden Bridge<span class="meta">Apr 11</span></div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> Hoi An lantern boat ride<span class="meta">Apr 13</span></div>
+            <div class="tcs-row"><span class="tcs-status ok">✓</span> Halong Bay overnight cruise<span class="meta">Apr 16</span></div>
+        </div>
+
+        <div class="trip-card-section">
+            <div class="tcs-label">Vouchers attached</div>
+            <div class="tcs-row">📎 8 PDF documents · auto-attached as bookings landed</div>
+        </div>
+    </div>
+
+    <p class="note">Every field in this record came from a confirmation email the consultant received. The customer can ask "what's my room type?" or "who's picking me up?" or "when is my Halong Bay cruise?" and get an instant accurate answer from this data. No hallucinations because the agent only answers from what's in the record.</p>
 
 
     <h3>What the customer experiences</h3>
