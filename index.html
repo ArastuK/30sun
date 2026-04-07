@@ -503,7 +503,59 @@
 
     <!-- PART 3 -->
     <h2 id="part3"><span class="n">3.</span> Measuring success</h2>
-    <p class="placeholder">Coming soon</p>
+
+    <h3>North star</h3>
+    <div class="callout fade-in">
+        <strong>% of customers who message a human consultant with "any update?" type queries in the 30 days post-payment.</strong>
+        <br><br>
+        Today this is probably the majority of inbound. Target: <strong>under 10%.</strong> If customers stop asking "any update?", it means the agent is delivering updates before they think to ask. This is the cleanest signal that the void is gone.
+    </div>
+
+    <h3>Leading indicators</h3>
+    <p>Move within days or weeks. Tell us early if the agent is working.</p>
+
+    <table class="fade-in">
+        <tr><th>Metric</th><th>Today (estimate)</th><th>Target</th></tr>
+        <tr><td>Time-to-first-update after payment</td><td>Days</td><td>Under 2 hours</td></tr>
+        <tr><td>% of bookings auto-captured by the agent</td><td>0%</td><td>Over 90%</td></tr>
+        <tr><td>Customer-initiated messages per trip (post-payment)</td><td>Baseline TBD</td><td>Cut by 50%</td></tr>
+        <tr><td>Median consultant response time on customer messages</td><td>Hours/days</td><td>Cut in half</td></tr>
+        <tr><td>Agent response accuracy (sampled, human-rated)</td><td>n/a</td><td>Over 95%, zero hallucinations</td></tr>
+    </table>
+
+    <h3>Lagging indicators</h3>
+    <p>Take 30-90 days to move. The real proof.</p>
+
+    <table class="fade-in">
+        <tr><th>Metric</th><th>Today</th><th>Target</th></tr>
+        <tr><td>Holidify rating</td><td>3.3★</td><td>4.2★+</td></tr>
+        <tr><td>Google Play app rating</td><td>3.4★</td><td>4.3★+</td></tr>
+        <tr><td>% of negative reviews mentioning communication or "any update"</td><td>Majority</td><td>Under 20%</td></tr>
+        <tr><td>Repeat customer rate (couples booking a second trip)</td><td>Baseline TBD</td><td>+30%</td></tr>
+        <tr><td>Referral rate (new customers from previous customers)</td><td>Baseline TBD</td><td>+25%</td></tr>
+    </table>
+
+    <h3>Counter-metrics (guardrails)</h3>
+    <p>Watch these to make sure the wins don't come at the cost of something else.</p>
+
+    <table class="fade-in">
+        <tr><th>Guardrail</th><th>Why it matters</th><th>Threshold</th></tr>
+        <tr><td>Booking-to-customer match accuracy</td><td>Wrong booking attached to wrong customer is a catastrophic failure</td><td>100%, zero mismatches</td></tr>
+        <tr><td>Escalation rate (% of agent conversations needing a human)</td><td>Too low = agent suppressing real needs. Too high = agent not actually helping</td><td>15-25%</td></tr>
+        <tr><td>Consultant adoption and sentiment</td><td>Consultants must want to use the system, not be forced</td><td>Net positive in monthly survey</td></tr>
+        <tr><td>"Personal touch" perception (post-trip survey)</td><td>Customers should feel more cared for, not less</td><td>No drop vs current baseline</td></tr>
+    </table>
+
+    <h3>How we'd test before scaling</h3>
+    <p>Don't roll this out to all trips at once. Run a controlled pilot first.</p>
+    <ol>
+        <li>Pick 20 upcoming trips. Randomly assign 10 to the agent group and 10 to the control group (current process).</li>
+        <li>Track all the leading indicators across both groups for the full duration of the trip cycle.</li>
+        <li>End-of-trip survey for NPS, CSAT, and a "personal touch" question for both groups.</li>
+        <li>If the agent group shows fewer support messages, higher NPS, and at least equal "personal touch" scores, expand to the next 100 trips.</li>
+        <li>If results are mixed or worse, fix the gaps before scaling further.</li>
+    </ol>
+    <p>This avoids the trap of shipping broadly based on a hunch and finding out three months later that it broke something.</p>
 
 </div>
 
